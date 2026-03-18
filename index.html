@@ -138,7 +138,9 @@
     <div class="party" id="party"></div>
   </div>
 
-  <audio id="bgMusic" src="music.mp3"></audio>
+  <audio id="bgMusic" preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   const yesBtn = document.getElementById("yesBtn");
