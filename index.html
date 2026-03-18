@@ -1,241 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Babydoll 🌸</title>
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  let floating = false;
 
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #d8a8ff, #c7b8ff, #acd8ff);
+  function startFloatingButton() {
+    if (floating) return;
+    floating = true;
+
+    const rect = yesBtn.getBoundingClientRect();
+    yesBtn.style.position = "fixed";
+    yesBtn.style.left = rect.left + "px";
+    yesBtn.style.top = rect.top + "px";
+  }
+
+  document.addEventListener("mousemove", (e) => {
+    const rect = yesBtn.getBoundingClientRect();
+
+    const btnX = rect.left + rect.width / 2;
+    const btnY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const dx = btnX - mouseX;
+    const dy = btnY - mouseY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const threshold = 170;
+
+    if (distance < threshold) {
+      startFloatingButton();
+
+      const safeDistance = Math.max(distance, 1);
+      const force = ((threshold - safeDistance) / threshold) * 220;
+
+      const moveX = (dx / safeDistance) * force;
+      const moveY = (dy / safeDistance) * force;
+
+      let newX = rect.left + moveX;
+      let newY = rect.top + moveY;
+
+      const margin = 12;
+      const maxX = window.innerWidth - rect.width - margin;
+      const maxY = window.innerHeight - rect.height - margin;
+
+      newX = Math.max(margin, Math.min(maxX, newX));
+      newY = Math.max(margin, Math.min(maxY, newY));
+
+      yesBtn.style.left = newX + "px";
+      yesBtn.style.top = newY + "px";
     }
+  });
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.16), transparent 28%),
-        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.14), transparent 32%);
-      animation: glow 10s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
+  yesBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
 
-    @keyframes glow {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-2%, 2%) scale(1.03); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
+  function showNo() {
+    document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
+    document.getElementById("party").textContent = "🎉🥳🎂💜";
 
-    .container {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-    }
+    const music = document.getElementById("bgMusic");
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      margin-bottom: 24px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.15);
-    }
-
-    .buttons {
-      position: relative;
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      min-height: 80px;
-    }
-
-    button {
-      padding: 14px 28px;
-      font-size: 16px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-      transition: transform 0.2s ease, left 0.18s linear, top 0.18s linear;
-    }
-
-    .yes-btn {
-      position: relative;
-      background: white;
-      color: #6b4ce6;
-      z-index: 3;
-    }
-
-    .no-btn {
-      background: #ffffffd9;
-      color: #5b5fef;
-      z-index: 2;
-    }
-
-    .no-btn:hover {
-      transform: scale(1.06);
-    }
-
-    .message {
-      margin-top: 28px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      min-height: 40px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    }
-
-    .party {
-      font-size: 2.6rem;
-      margin-top: 14px;
-      animation: pop 0.7s infinite alternate;
-      min-height: 52px;
-    }
-
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.12); }
-    }
-
-    .flower {
-      position: fixed;
-      top: -40px;
-      opacity: 0.9;
-      animation: fall linear infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg); }
-      100% { transform: translateY(110vh) rotate(360deg); }
-    }
-  </style>
-</head>
-<body>
-  <div id="flowers"></div>
-
-  <div class="container">
-    <h1>Will you cry on your birthday babydoll?</h1>
-
-    <div class="buttons">
-      <button class="yes-btn" id="yesBtn">Yes</button>
-      <button class="no-btn" onclick="showNo()">No</button>
-    </div>
-
-    <div class="message" id="message"></div>
-    <div class="party" id="party"></div>
-  </div>
-
-  <audio id="bgMusic" src="music.mp3"></audio>
-
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    let floating = false;
-
-    function startFloatingButton() {
-      if (floating) return;
-      floating = true;
-
-      const rect = yesBtn.getBoundingClientRect();
-      yesBtn.style.position = "fixed";
-      yesBtn.style.left = rect.left + "px";
-      yesBtn.style.top = rect.top + "px";
-    }
-
-    document.addEventListener("mousemove", (e) => {
-      const rect = yesBtn.getBoundingClientRect();
-
-      const btnX = rect.left + rect.width / 2;
-      const btnY = rect.top + rect.height / 2;
-
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      const dx = btnX - mouseX;
-      const dy = btnY - mouseY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      const threshold = 170;
-
-      if (distance < threshold) {
-        startFloatingButton();
-
-        const safeDistance = Math.max(distance, 1);
-        const force = ((threshold - safeDistance) / threshold) * 220;
-
-        const moveX = (dx / safeDistance) * force;
-        const moveY = (dy / safeDistance) * force;
-
-        let newX = rect.left + moveX;
-        let newY = rect.top + moveY;
-
-        const margin = 12;
-        const maxX = window.innerWidth - rect.width - margin;
-        const maxY = window.innerHeight - rect.height - margin;
-
-        newX = Math.max(margin, Math.min(maxX, newX));
-        newY = Math.max(margin, Math.min(maxY, newY));
-
-        yesBtn.style.left = newX + "px";
-        yesBtn.style.top = newY + "px";
-      }
-    });
-
-    yesBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
-
-function showNo() {
-  document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
-  document.getElementById("party").textContent = "🎉🥳🎂💜";
-
-  const music = document.getElementById("bgMusic");
-
-  music.pause();
-  music.currentTime = 13;
-
-  music.onloadedmetadata = () => {
+    music.pause();
     music.currentTime = 13;
-    music.play();
-  };
 
-  music.play().catch(() => {});
-}
+    music.onloadedmetadata = () => {
+      music.currentTime = 13;
+      music.play();
+    };
 
-      const music = document.getElementById("bgMusic");
-      music.play().catch(() => {});
-    }
+    music.play().catch(() => {});
+  }
 
-    const flowers = document.getElementById("flowers");
-    const emojis = [
-      "🌸","🌷","🌺","🌼",
-      "🌹","💐","🌻",
-      "💜","✨","⭐",
-      "🍷","🍾","🥂","🥃"
-    ];
+  const flowers = document.getElementById("flowers");
+  const emojis = [
+    "🌸","🌷","🌺","🌼",
+    "🌹","💐","🌻",
+    "💜","✨","⭐",
+    "🍷","🍾","🥂","🥃"
+  ];
 
-    for (let i = 0; i < 45; i++) {
-      const f = document.createElement("div");
-      f.className = "flower";
-      f.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      f.style.left = Math.random() * 100 + "vw";
-      f.style.animationDuration = (5 + Math.random() * 8) + "s";
-      f.style.animationDelay = Math.random() * 5 + "s";
-      f.style.fontSize = (16 + Math.random() * 24) + "px";
-      flowers.appendChild(f);
-    }
-  </script>
-</body>
-</html>
+  for (let i = 0; i < 45; i++) {
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.animationDuration = (5 + Math.random() * 8) + "s";
+    f.style.animationDelay = Math.random() * 5 + "s";
+    f.style.fontSize = (16 + Math.random() * 24) + "px";
+    flowers.appendChild(f);
+  }
+</script>
