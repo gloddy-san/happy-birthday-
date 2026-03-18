@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<audio id="bgMusic" src="music.mp3" loop></audio>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -198,9 +197,22 @@
       e.preventDefault();
     });
 
-    function showNo() {
-      document.getElementById("message").textContent = "that's what I want to hear";
-      document.getElementById("party").textContent = "🎉🥳🎂💜";
+function showNo() {
+  document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
+  document.getElementById("party").textContent = "🎉🥳🎂💜";
+
+  const music = document.getElementById("bgMusic");
+
+  music.pause();
+  music.currentTime = 13;
+
+  music.onloadedmetadata = () => {
+    music.currentTime = 13;
+    music.play();
+  };
+
+  music.play().catch(() => {});
+}
 
       const music = document.getElementById("bgMusic");
       music.play().catch(() => {});
