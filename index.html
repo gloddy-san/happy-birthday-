@@ -199,22 +199,26 @@
     e.preventDefault();
   });
 
-  function showNo() {
-    document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
-    document.getElementById("party").textContent = "🎉🥳🎂💜";
+function showNo() {
+  document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
+  document.getElementById("party").textContent = "🎉🥳🎂💜";
 
-    const music = document.getElementById("bgMusic");
+  const music = document.getElementById("bgMusic");
 
-    music.pause();
+  const startPlayback = () => {
     music.currentTime = 13;
+    music.play().catch((err) => {
+      console.error("Lecture impossible :", err);
+    });
+  };
 
-    music.onloadedmetadata = () => {
-      music.currentTime = 13;
-      music.play();
-    };
-
-    music.play().catch(() => {});
+  if (music.readyState >= 1) {
+    startPlayback();
+  } else {
+    music.addEventListener("loadedmetadata", startPlayback, { once: true });
+    music.load();
   }
+}
 
   const flowers = document.getElementById("flowers");
   const emojis = [
