@@ -1,158 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Babydoll 🌸</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Babydoll 🌸</title>
 
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #b57edc, #c77dff, #e0aaff);
-      color: white;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+  background: linear-gradient(135deg, #b57edc, #c77dff, #e0aaff);
+  color: white;
+  text-align: center;
+}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-    }
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      margin-bottom: 18px;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    }
+h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
 
-    p {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      min-height: 32px;
-    }
+button {
+  padding: 15px 25px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px;
+}
 
-    .buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 10px;
-    }
+.yes-btn {
+  position: absolute;
+  background: white;
+  color: purple;
+}
 
-    button {
-      padding: 14px 28px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
+.no-btn {
+  background: #ffe066;
+  color: #6a1b9a;
+}
 
-    button:hover {
-      transform: scale(1.07);
-    }
+.message {
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    .yes-btn {
-      background: white;
-      color: #8a2be2;
-    }
+.party {
+  font-size: 40px;
+  margin-top: 10px;
+  animation: pop 0.6s infinite alternate;
+}
 
-    .no-btn {
-      background: #ffe066;
-      color: #6a1b9a;
-    }
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
 
-    .message {
-      margin-top: 28px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    }
+/* fleurs */
+.flower {
+  position: fixed;
+  top: -40px;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
 
-    .party {
-      font-size: 3rem;
-      margin-top: 16px;
-      animation: pop 0.7s ease infinite alternate;
-    }
-
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.12); }
-    }
-
-    .flower {
-      position: fixed;
-      top: -40px;
-      font-size: 24px;
-      opacity: 0.9;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg);
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-  </style>
+@keyframes fall {
+  0% { transform: translateY(-10vh); }
+  100% { transform: translateY(110vh); }
+}
+</style>
 </head>
+
 <body>
-  <div id="flowers"></div>
 
-  <div class="container">
-    <h1>Will you cry on your birthday babydoll ?</h1>
+<div id="flowers"></div>
 
-    <div class="buttons">
-      <button class="yes-btn" onclick="showYes()">Yes</button>
-      <button class="no-btn" onclick="showNo()">No</button>
-    </div>
+<div class="container">
+  <h1>Will you cry on your birthday babydoll ?</h1>
 
-    <div class="message" id="message"></div>
-    <div class="party" id="party"></div>
-  </div>
+  <button class="yes-btn" id="yesBtn">Yes</button>
+  <button class="no-btn" onclick="showNo()">No</button>
 
-  <script>
-    function showYes() {
-      document.getElementById("message").textContent = "oui";
-      document.getElementById("party").textContent = "";
-    }
+  <div class="message" id="message"></div>
+  <div class="party" id="party"></div>
+</div>
 
-    function showNo() {
-      document.getElementById("message").textContent = "that's what I want to hear";
-      document.getElementById("party").textContent = "🎉🥳🎂🎊💜";
-    }
+<script>
 
-    const flowersContainer = document.getElementById("flowers");
-    const flowerEmojis = ["🌸", "🌷", "💮", "🌺", "🌼"];
+// 🎯 bouton qui fuit
+const yesBtn = document.getElementById("yesBtn");
 
-    for (let i = 0; i < 28; i++) {
-      const flower = document.createElement("div");
-      flower.className = "flower";
-      flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
-      flower.style.left = Math.random() * 100 + "vw";
-      flower.style.animationDuration = (6 + Math.random() * 8) + "s";
-      flower.style.animationDelay = Math.random() * 8 + "s";
-      flower.style.fontSize = (18 + Math.random() * 22) + "px";
-      flowersContainer.appendChild(flower);
-    }
-  </script>
+yesBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  yesBtn.style.left = x + "px";
+  yesBtn.style.top = y + "px";
+});
+
+// ❌ impossible de cliquer
+yesBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
+
+// ✅ bouton NO
+function showNo() {
+  document.getElementById("message").textContent = "that's what I want to hear";
+  document.getElementById("party").textContent = "🎉🥳🎂💜";
+}
+
+// 🌸 fleurs qui tombent
+const flowers = document.getElementById("flowers");
+const emojis = ["🌸","🌷","🌺","💮","🌼"];
+
+for (let i = 0; i < 30; i++) {
+  const f = document.createElement("div");
+  f.className = "flower";
+  f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  f.style.left = Math.random()*100 + "vw";
+  f.style.animationDuration = (5 + Math.random()*7) + "s";
+  f.style.fontSize = (18 + Math.random()*20) + "px";
+  flowers.appendChild(f);
+}
+
+</script>
+
 </body>
 </html>
