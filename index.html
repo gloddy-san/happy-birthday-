@@ -1,187 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Babydoll 🌸</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #cdb4ff, #b8c0ff, #a2d2ff);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Babydoll 🌸</title>
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.28), transparent 35%),
-                  radial-gradient(circle at 80% 30%, rgba(255,255,255,0.18), transparent 30%),
-                  radial-gradient(circle at 50% 80%, rgba(255,255,255,0.14), transparent 35%);
-      animation: glow 10s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+  text-align: center;
+  color: white;
 
-    @keyframes glow {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-2%, 2%) scale(1.03); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
+  /* 💜 plus de mauve + bleu doux */
+  background: linear-gradient(135deg, #c77dff, #b8c0ff, #a2d2ff);
+}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-    }
+/* glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+  animation: glow 10s infinite linear;
+  z-index: 0;
+}
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      margin-bottom: 24px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.15);
-    }
+@keyframes glow {
+  0% { transform: translate(-20%, -20%); }
+  50% { transform: translate(20%, 20%); }
+  100% { transform: translate(-20%, -20%); }
+}
 
-    .buttons {
-      display: flex;
-      gap: 20px;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      min-height: 70px;
-    }
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    button {
-      padding: 14px 28px;
-      font-size: 16px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-      transition: transform 0.2s ease;
-    }
+h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+}
 
-    button:hover {
-      transform: scale(1.08);
-    }
+/* boutons */
+.buttons {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
 
-    .yes-btn {
-      position: relative;
-      background: white;
-      color: #6c63ff;
-    }
+button {
+  padding: 15px 25px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    .no-btn {
-      background: #ffffffcc;
-      color: #5b5fef;
-    }
+.yes-btn {
+  position: relative;
+  background: white;
+  color: purple;
+}
 
-    .message {
-      margin-top: 28px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      min-height: 40px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    }
+.no-btn {
+  background: #ffe066;
+  color: #6a1b9a;
+}
 
-    .party {
-      font-size: 2.6rem;
-      margin-top: 14px;
-      animation: pop 0.7s infinite alternate;
-      min-height: 52px;
-    }
+.message {
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.12); }
-    }
+.party {
+  font-size: 40px;
+  margin-top: 10px;
+  animation: pop 0.6s infinite alternate;
+}
 
-    .flower {
-      position: fixed;
-      top: -40px;
-      font-size: 24px;
-      opacity: 0.9;
-      animation: fall linear infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
 
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg);
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-  </style>
+/* fleurs */
+.flower {
+  position: fixed;
+  top: -40px;
+  font-size: 24px;
+  animation: fall linear infinite;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+</style>
 </head>
+
 <body>
-  <div id="flowers"></div>
 
-  <div class="container">
-    <h1>Will you cry on your birthday babydoll?</h1>
+<div id="flowers"></div>
 
-    <div class="buttons">
-      <button class="yes-btn" id="yesBtn">Yes</button>
-      <button class="no-btn" onclick="showNo()">No</button>
-    </div>
+<div class="container">
+  <h1>Will you cry on your birthday babydoll ?</h1>
 
-    <div class="message" id="message"></div>
-    <div class="party" id="party"></div>
+  <div class="buttons">
+    <button class="yes-btn" id="yesBtn">Yes</button>
+    <button class="no-btn" onclick="showNo()">No</button>
   </div>
 
-  <!-- Remplace music.mp3 par ton propre fichier audio autorisé -->
-  <audio id="bgMusic" src="music.mp3"></audio>
+  <div class="message" id="message"></div>
+  <div class="party" id="party"></div>
+</div>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
+<audio id="bgMusic" src="music.mp3"></audio>
 
-    yesBtn.addEventListener("mouseover", () => {
-      yesBtn.style.position = "absolute";
+<script>
 
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
+// 🎯 bouton YES qui fuit MAIS reste visible
+const yesBtn = document.getElementById("yesBtn");
 
-      yesBtn.style.left = x + "px";
-      yesBtn.style.top = y + "px";
-    });
+yesBtn.addEventListener("mouseover", () => {
+  yesBtn.style.position = "absolute";
 
-    yesBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
+  const margin = 20; // marge sécurité
 
-    function showNo() {
-      document.getElementById("message").textContent = "that's what I want to hear";
-      document.getElementById("party").textContent = "🎉🥳🎂💜";
+  const maxX = window.innerWidth - yesBtn.offsetWidth - margin;
+  const maxY = window.innerHeight - yesBtn.offsetHeight - margin;
 
-      const music = document.getElementById("bgMusic");
-      music.play().catch(() => {
-        console.log("Playback blocked until user interaction is accepted.");
-      });
-    }
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-    const flowers = document.getElementById("flowers");
-    const emojis = ["🌸", "🌷", "🌺", "💮", "🌼", "💜"];
+  yesBtn.style.left = x + "px";
+  yesBtn.style.top = y + "px";
+});
 
-    for (let i = 0; i < 40; i++) {
-      const f = document.createElement("div");
-      f.className = "flower";
-      f.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      f.style.left = Math.random() * 100 + "vw";
-      f.style.animationDuration = (5 + Math.random() * 8) + "s";
-      f.style.animationDelay = Math.random() * 5 + "s";
-      f.style.fontSize = (16 + Math.random() * 24) + "px";
-      flowers.appendChild(f);
-    }
-  </script>
+// bloque clic
+yesBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
+
+// bouton NO
+function showNo() {
+  document.getElementById("message").textContent = "that's what I want to hear";
+  document.getElementById("party").textContent = "🎉🥳🎂💜";
+
+  document.getElementById("bgMusic").play().catch(()=>{});
+}
+
+// fleurs
+const flowers = document.getElementById("flowers");
+const emojis = ["🌸","🌷","🌺","💮","🌼","💜"];
+
+for (let i = 0; i < 40; i++) {
+  const f = document.createElement("div");
+  f.className = "flower";
+  f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+
+  f.style.left = Math.random()*100 + "vw";
+  f.style.animationDuration = (5 + Math.random()*8) + "s";
+  f.style.animationDelay = Math.random()*5 + "s";
+  f.style.fontSize = (16 + Math.random()*24) + "px";
+
+  flowers.appendChild(f);
+}
+
+</script>
+
 </body>
 </html>
