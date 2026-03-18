@@ -1,183 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Babydoll 🌸</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Babydoll 🌸</title>
 
-<style>
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: Arial;
-  text-align: center;
-  color: white;
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #d291ff, #b8c0ff, #a8d8ff);
+    }
 
-  /* 💜 plus de mauve + bleu doux */
-  background: linear-gradient(135deg, #c77dff, #b8c0ff, #a2d2ff);
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.16), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.14), transparent 32%);
+      animation: glow 10s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-/* glow */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
-  animation: glow 10s infinite linear;
-  z-index: 0;
-}
+    @keyframes glow {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-2%, 2%) scale(1.03); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
 
-@keyframes glow {
-  0% { transform: translate(-20%, -20%); }
-  50% { transform: translate(20%, 20%); }
-  100% { transform: translate(-20%, -20%); }
-}
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
 
-.container {
-  position: relative;
-  z-index: 2;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      margin-bottom: 24px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    }
 
-h1 {
-  font-size: 38px;
-  margin-bottom: 25px;
-}
+    .buttons {
+      position: relative;
+      width: 320px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
 
-/* boutons */
-.buttons {
-  display: flex;
-  gap: 20px;
-  position: relative;
-}
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
 
-button {
-  padding: 15px 25px;
-  font-size: 16px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
+    .yes-btn,
+    .no-btn {
+      position: absolute;
+      transition: left 0.35s ease, top 0.35s ease, transform 0.2s ease;
+    }
 
-.yes-btn {
-  position: relative;
-  background: white;
-  color: purple;
-}
+    .yes-btn {
+      background: white;
+      color: #6b4ce6;
+      left: 70px;
+      top: 15px;
+      z-index: 3;
+    }
 
-.no-btn {
-  background: #ffe066;
-  color: #6a1b9a;
-}
+    .no-btn {
+      background: #ffffffd9;
+      color: #5b5fef;
+      left: 170px;
+      top: 15px;
+      z-index: 2;
+    }
 
-.message {
-  margin-top: 30px;
-  font-size: 22px;
-  font-weight: bold;
-}
+    .no-btn:hover {
+      transform: scale(1.06);
+    }
 
-.party {
-  font-size: 40px;
-  margin-top: 10px;
-  animation: pop 0.6s infinite alternate;
-}
+    .message {
+      margin-top: 28px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      min-height: 40px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
 
-@keyframes pop {
-  from { transform: scale(1); }
-  to { transform: scale(1.2); }
-}
+    .party {
+      font-size: 2.6rem;
+      margin-top: 14px;
+      animation: pop 0.7s infinite alternate;
+      min-height: 52px;
+    }
 
-/* fleurs */
-.flower {
-  position: fixed;
-  top: -40px;
-  font-size: 24px;
-  animation: fall linear infinite;
-  opacity: 0.9;
-  z-index: 1;
-}
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.12); }
+    }
 
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); }
-  100% { transform: translateY(110vh) rotate(360deg); }
-}
-</style>
+    .flower {
+      position: fixed;
+      top: -40px;
+      font-size: 24px;
+      opacity: 0.9;
+      animation: fall linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
 </head>
-
 <body>
+  <div id="flowers"></div>
 
-<div id="flowers"></div>
+  <div class="container">
+    <h1>Will you cry on your birthday babydoll?</h1>
 
-<div class="container">
-  <h1>Will you cry on your birthday babydoll ?</h1>
+    <div class="buttons" id="buttonZone">
+      <button class="yes-btn" id="yesBtn">Yes</button>
+      <button class="no-btn" onclick="showNo()">No</button>
+    </div>
 
-  <div class="buttons">
-    <button class="yes-btn" id="yesBtn">Yes</button>
-    <button class="no-btn" onclick="showNo()">No</button>
+    <div class="message" id="message"></div>
+    <div class="party" id="party"></div>
   </div>
 
-  <div class="message" id="message"></div>
-  <div class="party" id="party"></div>
-</div>
+  <audio id="bgMusic" src="music.mp3"></audio>
 
-<audio id="bgMusic" src="music.mp3"></audio>
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const zone = document.getElementById("buttonZone");
 
-<script>
+    let isFloating = false;
 
-// 🎯 bouton YES qui fuit MAIS reste visible
-const yesBtn = document.getElementById("yesBtn");
+    function moveYesSmoothly() {
+      const zoneRect = zone.getBoundingClientRect();
+      const btnWidth = yesBtn.offsetWidth;
+      const btnHeight = yesBtn.offsetHeight;
 
-yesBtn.addEventListener("mouseover", () => {
-  yesBtn.style.position = "absolute";
+      const padding = 8;
+      const maxLeft = zoneRect.width - btnWidth - padding;
+      const maxTop = zoneRect.height - btnHeight - padding;
 
-  const margin = 20; // marge sécurité
+      const randomLeft = Math.max(padding, Math.random() * maxLeft);
+      const randomTop = Math.max(padding, Math.random() * maxTop);
 
-  const maxX = window.innerWidth - yesBtn.offsetWidth - margin;
-  const maxY = window.innerHeight - yesBtn.offsetHeight - margin;
+      yesBtn.style.left = randomLeft + "px";
+      yesBtn.style.top = randomTop + "px";
+    }
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+    yesBtn.addEventListener("mouseenter", () => {
+      moveYesSmoothly();
 
-  yesBtn.style.left = x + "px";
-  yesBtn.style.top = y + "px";
-});
+      if (!isFloating) {
+        isFloating = true;
+        setInterval(() => {
+          moveYesSmoothly();
+        }, 700);
+      }
+    });
 
-// bloque clic
-yesBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-});
+    yesBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
 
-// bouton NO
-function showNo() {
-  document.getElementById("message").textContent = "that's what I want to hear";
-  document.getElementById("party").textContent = "🎉🥳🎂💜";
+    function showNo() {
+      document.getElementById("message").textContent = "that's what I want to hear";
+      document.getElementById("party").textContent = "🎉🥳🎂💜";
+      document.getElementById("bgMusic").play().catch(() => {});
+    }
 
-  document.getElementById("bgMusic").play().catch(()=>{});
-}
+    const flowers = document.getElementById("flowers");
+    const emojis = ["🌸","🌷","🌺","🌼","🌹","💐","🌻","💜","✨","⭐","🍷","🍾","🥂","🥃"];
 
-// fleurs
-const flowers = document.getElementById("flowers");
-const emojis = ["🌸","🌷","🌺","💮","🌼","💜"];
-
-for (let i = 0; i < 40; i++) {
-  const f = document.createElement("div");
-  f.className = "flower";
-  f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-
-  f.style.left = Math.random()*100 + "vw";
-  f.style.animationDuration = (5 + Math.random()*8) + "s";
-  f.style.animationDelay = Math.random()*5 + "s";
-  f.style.fontSize = (16 + Math.random()*24) + "px";
-
-  flowers.appendChild(f);
-}
-
-</script>
-
+    for (let i = 0; i < 40; i++) {
+      const f = document.createElement("div");
+      f.className = "flower";
+      f.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      f.style.left = Math.random() * 100 + "vw";
+      f.style.animationDuration = (5 + Math.random() * 8) + "s";
+      f.style.animationDelay = Math.random() * 5 + "s";
+      f.style.fontSize = (16 + Math.random() * 24) + "px";
+      flowers.appendChild(f);
+    }
+  </script>
 </body>
 </html>
