@@ -138,8 +138,8 @@
     <div class="party" id="party"></div>
   </div>
 
-  <audio id="bgMusic" preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
+  <audio id="bgMusic" controls preload="auto">
+  <source src="music.mp3?v=2" type="audio/mpeg">
 </audio>
 
 <script>
@@ -204,13 +204,8 @@ function showNo() {
   document.getElementById("party").textContent = "🎉🥳🎂💜";
 
   const music = document.getElementById("bgMusic");
-
-  const startPlayback = () => {
-    music.currentTime = 13;
-    music.play().catch((err) => {
-      console.error("Lecture impossible :", err);
-    });
-  };
+  music.play().catch(err => console.log(err));
+}
 
   if (music.readyState >= 1) {
     startPlayback();
