@@ -138,9 +138,7 @@
     <div class="party" id="party"></div>
   </div>
 
-  <audio id="bgMusic" controls preload="auto">
-  <source src="musicality.mp3?v=2" type="audio/mpeg">
-</audio>
+  <audio id="bgMusic" src="music.mp3"></audio>
 
 <script>
   const yesBtn = document.getElementById("yesBtn");
@@ -199,21 +197,22 @@
     e.preventDefault();
   });
 
-function showNo() {
-  document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
-  document.getElementById("party").textContent = "🎉🥳🎂💜";
+  function showNo() {
+    document.getElementById("message").textContent = "that's what I want to hear IN sana 7ilwa jidan";
+    document.getElementById("party").textContent = "🎉🥳🎂💜";
 
-  const music = document.getElementById("bgMusic");
-  music.play().catch(err => console.log(err));
-}
+    const music = document.getElementById("bgMusic");
 
-  if (music.readyState >= 1) {
-    startPlayback();
-  } else {
-    music.addEventListener("loadedmetadata", startPlayback, { once: true });
-    music.load();
+    music.pause();
+    music.currentTime = 13;
+
+    music.onloadedmetadata = () => {
+      music.currentTime = 13;
+      music.play();
+    };
+
+    music.play().catch(() => {});
   }
-}
 
   const flowers = document.getElementById("flowers");
   const emojis = [
